@@ -5,6 +5,7 @@ Canonical OpenAPI and AsyncAPI contracts shared by labs in
 
 ## Layout
 
+- `common/` contains deduplicated contracts reused by multiple labs.
 - `openapi/` contains OpenAPI contracts grouped by lab or shared scenario.
 - `asyncapi/` contains AsyncAPI contracts grouped by lab or shared scenario.
 - Shared contracts are deduplicated here and referenced from lab `specmatic.yaml`
