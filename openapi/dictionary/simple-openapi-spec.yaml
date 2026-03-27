@@ -152,30 +152,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Order'
   /monitor/{id}:
-    get:
-      description: Retrieves a Monitor by ID
-      operationId: retrieveMonitor
-      tags:
-        - Monitor
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Monitor status
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MonitorResponse'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequest'
+    $ref: '../../common/openapi/common-schemas.yaml#/components/pathItems/MonitorById'
 components:
   schemas:
     ProductInventory:
