@@ -28,7 +28,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProductBase'
+              $ref: '../common-schemas.yaml#/components/schemas/ProductBase'
             examples:
               SUCCESS_PRODUCT:
                 value:
@@ -41,7 +41,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Id'
+                $ref: '../common-schemas.yaml#/components/schemas/Id'
               examples:
                 SUCCESS_PRODUCT:
                   value:
@@ -51,17 +51,17 @@ paths:
           headers:
             Link:
               schema:
-                $ref: '#/components/schemas/MonitorLink'
+                $ref: '../common-schemas.yaml#/components/schemas/MonitorLink'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest'
+                $ref: '../common-schemas.yaml#/components/schemas/BadRequest'
   /findAvailableProducts:
     parameters:
       - schema:
-          $ref : '#/components/schemas/ProductType'
+          $ref : '../common-schemas.yaml#/components/schemas/ProductType'
         name: type
         in: query
         required: false
@@ -109,7 +109,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Product'
+                  $ref: '../common-schemas.yaml#/components/schemas/Product'
               examples:
                 SUCCESS_GET:
                   value:
@@ -130,7 +130,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest'
+                $ref: '../common-schemas.yaml#/components/schemas/BadRequest'
   /orders:
     post:
       description: Create a new order
@@ -141,7 +141,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrderBase'
+              $ref: '../common-schemas.yaml#/components/schemas/OrderBase'
             examples:
               SUCCESS_ORDER:
                 value:
@@ -153,7 +153,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Id'
+                $ref: '../common-schemas.yaml#/components/schemas/Id'
               examples:
                 SUCCESS_ORDER:
                   value:
@@ -163,13 +163,13 @@ paths:
           headers:
             Link:
               schema:
-                $ref: '#/components/schemas/MonitorLink'
+                $ref: '../common-schemas.yaml#/components/schemas/MonitorLink'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest'
+                $ref: '../common-schemas.yaml#/components/schemas/BadRequest'
     get:
       description: Retrieve orders
       operationId: getOrders
@@ -194,7 +194,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Order'
+                  $ref: '../common-schemas.yaml#/components/schemas/Order'
               examples:
                 SUCCESS_GET_ORDER:
                   value:
@@ -204,136 +204,3 @@ paths:
                       status: "completed"
   /monitor/{id}:
     $ref: '../common-schemas.yaml#/components/pathItems/MonitorById'
-components:
-  schemas:
-    ProductInventory:
-      type: integer
-      minimum: 1
-      maximum: 101
-    ProductType:
-      type: string
-      title: Product Type
-      enum:
-        - book
-        - food
-        - gadget
-        - other
-    MonitorLink:
-      type: string
-      description: Monitor link to check status
-      example: </monitor/123>;rel=related;title=monitor
-    Id:
-      type: object
-      properties:
-        id:
-          type: integer
-      required:
-        - id
-    ProductBase:
-      title: Product Details
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/ProductType'
-        inventory:
-          $ref: '#/components/schemas/ProductInventory'
-      required:
-        - name
-        - type
-        - inventory
-    CreatedOn:
-        type: object
-        required:
-          - createdOn
-        properties:
-          createdOn:
-            type: string
-            format: date
-    Product:
-      allOf:
-        - $ref: '#/components/schemas/Id'
-        - $ref: '#/components/schemas/ProductBase'
-        - $ref: '#/components/schemas/CreatedOn'
-    OrderBase:
-      title: Order Details
-      type: object
-      properties:
-        productid:
-          type: integer
-        count:
-          type: integer
-      required:
-        - productid
-        - count
-    Order:
-      allOf:
-        - $ref: '#/components/schemas/Id'
-        - $ref: '#/components/schemas/OrderBase'
-        - type: object
-          properties:
-            status:
-              type: string
-              enum: [pending, completed, cancelled]
-          required:
-            - status
-    MonitorResponse:
-      type: object
-      description: Monitoring of resources
-      properties:
-        request:
-          $ref: '#/components/schemas/Request'
-        response:
-          $ref: '#/components/schemas/Response'
-    Request:
-      type: object
-      description: A response to a request
-      properties:
-        method:
-          type: string
-        body:
-          type: object
-        headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/HeaderItem'
-      required:
-        - method
-        - body
-        - headers
-    Response:
-      type: object
-      description: A response to a request
-      properties:
-        statusCode:
-          type: integer
-        body:
-          type: object
-        headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/HeaderItem'
-      required:
-        - statusCode
-        - body
-        - headers
-    HeaderItem:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-    BadRequest:
-      title: Bad Request
-      type: object
-      properties:
-        timestamp:
-          type: string
-        status:
-          type: integer
-        error:
-          type: string
-        message:
-          type: string

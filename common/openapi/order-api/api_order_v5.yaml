@@ -40,7 +40,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Product"
+                $ref: "../common-schemas.yaml#/components/schemas/Product"
               examples:
                 GET_PRODUCT:
                   value:
@@ -64,7 +64,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProductBase"
+              $ref: "../common-schemas.yaml#/components/schemas/ProductBase"
             examples:
               UPDATE_PRODUCT:
                 value:
@@ -171,7 +171,7 @@ paths:
         - name: type
           in: query
           schema:
-            $ref: "#/components/schemas/ProductType"
+            $ref: "../common-schemas.yaml#/components/schemas/ProductType"
         - name: pageSize
           in: header
           required: false
@@ -197,7 +197,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Product"
+                  $ref: "../common-schemas.yaml#/components/schemas/Product"
         "400":
           $ref: "#/components/responses/BadRequest"
     post:
@@ -220,7 +220,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProductBase"
+              $ref: "../common-schemas.yaml#/components/schemas/ProductBase"
             examples:
                 CREATE_PRODUCT:
                   value:
@@ -233,7 +233,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Id"
+                $ref: "../common-schemas.yaml#/components/schemas/Id"
         "400":
           $ref: "#/components/responses/BadRequest"
         "422":
@@ -259,7 +259,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OrderBase"
+              $ref: "../common-schemas.yaml#/components/schemas/OrderBase"
             examples:
               CREATE_ORDER:
                 value:
@@ -271,7 +271,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Id"
+                $ref: "../common-schemas.yaml#/components/schemas/Id"
               examples:
                 CREATE_ORDER:
                   value:
@@ -397,70 +397,6 @@ paths:
           $ref: "#/components/responses/NotFound"
 components:
   schemas:
-    ProductInventory:
-      type: integer
-      minimum: 1
-      maximum: 101
-
-    ProductType:
-      type: string
-      title: Product Type
-      enum:
-        - book
-        - food
-        - gadget
-        - other
-
-    Id:
-      type: object
-      properties:
-        id:
-          type: integer
-      required:
-        - id
-
-    ProductBase:
-      title: Product Details
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/ProductType'
-        inventory:
-          $ref: '#/components/schemas/ProductInventory'
-      required:
-        - name
-        - type
-        - inventory
-
-    Product:
-      allOf:
-        - $ref: '#/components/schemas/Id'
-        - $ref: '#/components/schemas/ProductBase'
-        - $ref: '#/components/schemas/CreationTime'
-
-    CreationTime:
-      type: object
-      required:
-      - createdOn
-      properties:
-        createdOn:
-          type: string
-          format: date
-
-    OrderBase:
-      title: Order Details
-      type: object
-      properties:
-        productid:
-          type: integer
-        count:
-          type: integer
-      required:
-        - productid
-        - count
-
     OrderStatus:
       type: string
       title: OrderStatus
@@ -471,8 +407,8 @@ components:
     
     Order:
       allOf:
-        - $ref: '#/components/schemas/Id'
-        - $ref: '#/components/schemas/OrderBase'
+        - $ref: '../common-schemas.yaml#/components/schemas/Id'
+        - $ref: '../common-schemas.yaml#/components/schemas/OrderBase'
         - type: object
           properties:
             status:
@@ -482,7 +418,7 @@ components:
 
     OrderUpdate:
       allOf:
-        - $ref: '#/components/schemas/OrderBase'
+        - $ref: '../common-schemas.yaml#/components/schemas/OrderBase'
         - type: object
           properties:
             status:

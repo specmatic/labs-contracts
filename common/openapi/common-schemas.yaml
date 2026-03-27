@@ -1,5 +1,9 @@
 components:
   schemas:
+    ProductInventory:
+      type: integer
+      minimum: 1
+      maximum: 101
     ProductType:
       type: string
       title: Product Type
@@ -27,6 +31,25 @@ components:
         createdOn:
           type: string
           format: date
+    ProductBase:
+      title: Product Details
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ProductType'
+        inventory:
+          $ref: '#/components/schemas/ProductInventory'
+      required:
+        - name
+        - type
+        - inventory
+    Product:
+      allOf:
+        - $ref: '#/components/schemas/Id'
+        - $ref: '#/components/schemas/ProductBase'
+        - $ref: '#/components/schemas/CreatedOn'
     OrderBase:
       title: Order Details
       type: object
