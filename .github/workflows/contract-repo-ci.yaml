@@ -1,0 +1,68 @@
+name: Contract Repository CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  contract-repo-checks:
+    runs-on: ubuntu-latest
+    env:
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+      PUBLISH_TO_INSIGHTS: ${{ github.event_name == 'push' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Fetch default branch
+        run: git fetch origin "${DEFAULT_BRANCH}" --depth=1
+
+      - name: Validate inline OpenAPI examples
+        shell: bash
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/usr/src/app" \
+            specmatic/enterprise \
+            validate
+
+      - name: Check backward compatibility
+        shell: bash
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/usr/src/app" \
+            specmatic/enterprise \
+            backward-compatibility-check \
+            --base-branch "origin/${DEFAULT_BRANCH}" 
+
+      - name: Write specmatic license key to file
+        if: env.PUBLISH_TO_INSIGHTS == 'true'
+        run: |
+          mkdir -p ~/.specmatic
+          echo "${{ secrets.SPECMATIC_LICENSE_KEY }}" > ~/.specmatic/specmatic-license.txt
+
+      - name: Generate central contract repo report
+        if: env.PUBLISH_TO_INSIGHTS == 'true'
+        run: |
+          docker run --rm \
+            -v ~/.specmatic:/root/.specmatic \
+            -v ${{ github.workspace }}:/usr/src/app \
+            specmatic/enterprise \
+            central-contract-repo-report
+
+      - name: Publish Build Reports to Specmatic Insights
+        if: env.PUBLISH_TO_INSIGHTS == 'true'
+        run: |
+          docker run --rm \
+            -v ~/.specmatic:/root/.specmatic \
+            -v ${{ github.workspace }}:/usr/src/app \
+            specmatic/enterprise \
+            send-report \
+            --branch-name ${{ github.ref_name }} \
+            --repo-name ${{ github.event.repository.name }} \
+            --repo-id ${{ github.repository_id }} \
+            --repo-url ${{ github.event.repository.html_url }}
