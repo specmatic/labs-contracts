@@ -28,7 +28,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProductBase'
+              $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/ExtendedProductBase'
       responses:
         '201':
           description: Product created
@@ -85,7 +85,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/ExtendedProduct'
         '429':
           description: TooManyRequests
           headers:
@@ -155,32 +155,3 @@ paths:
                   $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/Order'
   /monitor/{id}:
     $ref: '../../common/openapi/common-schemas.yaml#/components/pathItems/MonitorById'
-components:
-  schemas:
-    ProductInventory:
-      type: integer
-      minimum: 1
-      maximum: 9999
-    ProductBase:
-      title: Product Details
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/ProductType'
-        inventory:
-          $ref: '#/components/schemas/ProductInventory'
-        cost:
-          type: number
-          format: float
-          minimum: 0.01
-      required:
-        - name
-        - type
-        - inventory
-    Product:
-      allOf:
-        - $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/Id'
-        - $ref: '#/components/schemas/ProductBase'
-        - $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/CreatedOn'

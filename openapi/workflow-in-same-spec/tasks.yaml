@@ -359,7 +359,7 @@ components:
           nullable: true
         hold:
           allOf:
-            - $ref: '#/components/schemas/createTaskFraudHold'
+            - $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/FraudHold'
           description: Fraud hold details - Fraud type tasks only
           nullable: true
         outcome:
@@ -375,19 +375,6 @@ components:
           description: Flag to indicate if customer task creation not required for a verification task
       additionalProperties: { }
       description: Model for Task data type
-    createTaskFraudHold:
-      type: object
-      properties:
-        durationInMinutes:
-          type: integer
-          description: Duration of hold in Minutes
-          format: int32
-        autoCloseAction:
-          type: string
-          description: Action to be performed after lapsing DurationInMinutes
-          nullable: true
-      additionalProperties: { }
-      description: Fraud hold details
     createTaskResponse:
       type: object
       properties:
@@ -417,7 +404,7 @@ components:
           description: State of the task
         hold:
           allOf:
-            - $ref: '#/components/schemas/createTaskFraudHold'
+            - $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/FraudHold'
           description: Fraud hold details
           nullable: true
       additionalProperties: { }
@@ -452,19 +439,6 @@ components:
           description: Associated tasks with the application Id
       additionalProperties: { }
       description: Response model for Create task
-    fraudHold:
-      type: object
-      properties:
-        durationInMinutes:
-          type: integer
-          description: Duration of hold in Minutes
-          format: int32
-        autoCloseAction:
-          type: string
-          description: Action to be performed after lapsing DurationInMinutes
-          nullable: true
-      additionalProperties: { }
-      description: Fraud hold details
     problemDetails:
       type: object
       properties:
@@ -524,7 +498,7 @@ components:
           nullable: true
         hold:
           allOf:
-            - $ref: '#/components/schemas/fraudHold'
+            - $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/FraudHold'
           description: Fraud hold details
           nullable: true
         state:

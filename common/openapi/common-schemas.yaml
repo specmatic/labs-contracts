@@ -50,6 +50,33 @@ components:
         - $ref: '#/components/schemas/Id'
         - $ref: '#/components/schemas/ProductBase'
         - $ref: '#/components/schemas/CreatedOn'
+    ExtendedProductInventory:
+      type: integer
+      minimum: 1
+      maximum: 9999
+    ExtendedProductBase:
+      title: Product Details
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ProductType'
+        inventory:
+          $ref: '#/components/schemas/ExtendedProductInventory'
+        cost:
+          type: number
+          format: float
+          minimum: 0.01
+      required:
+        - name
+        - type
+        - inventory
+    ExtendedProduct:
+      allOf:
+        - $ref: '#/components/schemas/Id'
+        - $ref: '#/components/schemas/ExtendedProductBase'
+        - $ref: '#/components/schemas/CreatedOn'
     OrderBase:
       title: Order Details
       type: object
@@ -61,6 +88,13 @@ components:
       required:
         - productid
         - count
+    FulfilledOrderStatus:
+      type: string
+      title: OrderStatus
+      enum:
+        - fulfilled
+        - pending
+        - cancelled
     Order:
       allOf:
         - $ref: '#/components/schemas/Id'
@@ -119,6 +153,19 @@ components:
           type: string
         value:
           type: string
+    FraudHold:
+      type: object
+      properties:
+        durationInMinutes:
+          type: integer
+          description: Duration of hold in Minutes
+          format: int32
+        autoCloseAction:
+          type: string
+          description: Action to be performed after lapsing DurationInMinutes
+          nullable: true
+      additionalProperties: {}
+      description: Fraud hold details
     BadRequest:
       title: Bad Request
       type: object

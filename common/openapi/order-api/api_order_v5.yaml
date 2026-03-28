@@ -397,14 +397,6 @@ paths:
           $ref: "#/components/responses/NotFound"
 components:
   schemas:
-    OrderStatus:
-      type: string
-      title: OrderStatus
-      enum:
-        - fulfilled
-        - pending
-        - cancelled
-    
     Order:
       allOf:
         - $ref: '../common-schemas.yaml#/components/schemas/Id'
@@ -412,7 +404,7 @@ components:
         - type: object
           properties:
             status:
-              $ref: '#/components/schemas/OrderStatus'
+              $ref: '../common-schemas.yaml#/components/schemas/FulfilledOrderStatus'
           required:
             - status
 
@@ -422,7 +414,7 @@ components:
         - type: object
           properties:
             status:
-              $ref: '#/components/schemas/OrderStatus'
+              $ref: '../common-schemas.yaml#/components/schemas/FulfilledOrderStatus'
           required:
             - status
 
@@ -430,40 +422,27 @@ components:
       type: string
       format: uuid
 
-    ErrorResponseBody:
-      title: Bad Request
-      type: object
-      properties:
-        timestamp:
-          type: string
-        status:
-          type: integer
-        error:
-          type: string
-        message:
-          type: string
-  
   responses:
     NotFound:
       description: "Not Found"
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponseBody"
+            $ref: "../common-schemas.yaml#/components/schemas/BadRequest"
 
     BadRequest:
       description: "Bad Request"
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponseBody"
+            $ref: "../common-schemas.yaml#/components/schemas/BadRequest"
     
     UnprocessableEntity:
       description: "Unprocessable Entity"
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponseBody"
+            $ref: "../common-schemas.yaml#/components/schemas/BadRequest"
 
   securitySchemes:
     ApiKeyAuth:
