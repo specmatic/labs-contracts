@@ -35,6 +35,7 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/usr/src/app" \
+            --user $(id -u):$(id -g) \
             specmatic/enterprise \
             backward-compatibility-check \
             --base-branch "origin/${DEFAULT_BRANCH}" 
