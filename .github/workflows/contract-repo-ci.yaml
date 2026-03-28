@@ -22,11 +22,6 @@ jobs:
       - name: Fetch default branch
         run: git fetch origin "${DEFAULT_BRANCH}" --depth=1
 
-      - name: Resolve base revision
-        shell: bash
-        run: |
-          echo "BASE_SHA=$(git rev-parse "origin/${DEFAULT_BRANCH}")" >> "$GITHUB_ENV"
-
       - name: Validate inline OpenAPI examples
         shell: bash
         run: |
@@ -40,9 +35,10 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/usr/src/app" \
+            --user $(id -u):$(id -g) \
             specmatic/enterprise \
             backward-compatibility-check \
-            --base-branch "${BASE_SHA}"
+            --base-branch "origin/${DEFAULT_BRANCH}" 
 
       - name: Write specmatic license key to file
         if: env.PUBLISH_TO_INSIGHTS == 'true'
