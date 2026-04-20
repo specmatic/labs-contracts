@@ -21,6 +21,7 @@ paths:
       tags:
         - Product
       requestBody:
+        required: true
         content:
           application/json:
             schema:
