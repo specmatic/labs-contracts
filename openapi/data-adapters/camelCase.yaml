@@ -1,5 +1,5 @@
 openapi: 3.0.3
-info:
+info: 
   title: Simple Test API
   version: 1.0.0
 tags:
