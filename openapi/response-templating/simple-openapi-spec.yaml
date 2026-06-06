@@ -138,27 +138,5 @@ paths:
             application/json:
               schema:
                 $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/BadRequest'
-    get:
-      summary: Retrieve orders
-      description: Retrieve orders
-      operationId: getOrders
-      tags:
-        - Order
-      parameters:
-        - in: query
-          name: orderId
-          schema:
-            type: integer
-          required: false
-          description: ID of the order to retrieve. If not provided, returns all orders.
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/Order'
   /monitor/{id}:
     $ref: '../../common/openapi/common-schemas.yaml#/components/pathItems/MonitorById'
