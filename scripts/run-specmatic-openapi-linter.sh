@@ -10,6 +10,10 @@ cd "$ROOT_DIR"
 
 OPENAPI_SPECS=()
 SPEC_CANDIDATES=()
+SKIPPED_SPECS=(
+  "common/openapi/order-bff/product_search_bff_v6.yaml"
+  "openapi/order-bff-resiliency/product_search_bff_v6.yaml"
+)
 
 if [ "$#" -gt 0 ]; then
   SPEC_CANDIDATES=("$@")
@@ -20,6 +24,18 @@ else
 fi
 
 for spec_path in "${SPEC_CANDIDATES[@]}"; do
+  should_skip=false
+  for skipped_spec in "${SKIPPED_SPECS[@]}"; do
+    if [ "$spec_path" = "$skipped_spec" ]; then
+      should_skip=true
+      break
+    fi
+  done
+
+  if [ "$should_skip" = true ]; then
+    continue
+  fi
+
   if [ -f "$spec_path" ] && grep -Eq '^(openapi|swagger):' "$spec_path"; then
     OPENAPI_SPECS+=("$spec_path")
   fi
