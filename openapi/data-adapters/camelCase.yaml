@@ -2,21 +2,30 @@ openapi: 3.0.3
 info:
   title: Simple Test API
   version: 1.0.0
+tags:
+  - name: Test
+    description: Test endpoints for data adapter behavior.
 
 paths:
   /test:
     post:
       summary: Simple POST test
+      description: Sends a simple request to validate camelCase payload and header handling.
+      operationId: runCamelCaseAdapterTest
+      tags:
+        - Test
       parameters:
         - name: requestQuery
           in: query
           required: true
+          description: Query value used by the test request.
           schema:
             type: string
 
         - name: requestHeader
           in: header
           required: true
+          description: Header value required by the test request.
           schema:
             type: string
 

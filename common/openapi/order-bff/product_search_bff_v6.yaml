@@ -8,18 +8,19 @@ info:
 servers:
   - url: http://localhost:8080
 tags:
-  - name: WIP
-    description: API still under development
-  - name: Product
-    description: Product Related APIs
-  - name: Order
-    description: Order Related APIs
   - name: Monitor
     description: Monitor Related APIs
+  - name: Order
+    description: Order Related APIs
+  - name: Product
+    description: Product Related APIs
+  - name: WIP
+    description: API still under development
 paths:
   /products:
     summary: Create a new product
     post:
+      summary: Create a product
       description: Create a new product
       operationId: createProduct
       tags:
@@ -66,6 +67,7 @@ paths:
         name: type
         in: query
         required: false
+        description: Filter available products by product type.
         examples:
           SUCCESS_GET:
             value: gadget
@@ -74,6 +76,7 @@ paths:
         schema:
           type: integer
         required: true
+        description: Number of products to return per page.
         examples:
           SUCCESS_GET:
             value: 10
@@ -98,6 +101,7 @@ paths:
           SUCCESS_GET:
             value: "2025-11-28"
     get:
+      summary: Find available products
       description: Find available products
       operationId: findAvailableProducts
       tags:
@@ -134,6 +138,7 @@ paths:
                 $ref: '../common-schemas.yaml#/components/schemas/BadRequest'
   /orders:
     post:
+      summary: Create an order
       description: Create a new order
       operationId: createOrder
       tags:
@@ -173,10 +178,10 @@ paths:
               schema:
                 $ref: '../common-schemas.yaml#/components/schemas/BadRequest'
     get:
+      summary: Retrieve orders
       description: Retrieve orders
       operationId: getOrders
       tags:
-        - WIP
         - Order
       parameters:
         - in: query

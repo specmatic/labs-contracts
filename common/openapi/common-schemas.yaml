@@ -194,6 +194,7 @@ components:
   pathItems:
     MonitorById:
       get:
+        summary: Retrieve a monitor by ID
         description: Retrieves a Monitor by ID
         operationId: retrieveMonitor
         tags:
@@ -202,6 +203,7 @@ components:
           - name: id
             in: path
             required: true
+            description: Identifier of the monitor resource to retrieve.
             schema:
               type: integer
         responses:

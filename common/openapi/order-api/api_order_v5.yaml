@@ -8,10 +8,10 @@ info:
 servers:
   - url: "http://localhost:3000"
 tags:
-  - name: Product
-    description: Product Related APIs
   - name: Order
     description: Order Related APIs
+  - name: Product
+    description: Product Related APIs
 paths:
   "/products/{id}":
     parameters:
@@ -20,6 +20,7 @@ paths:
           type: integer
         in: path
         required: true
+        description: Identifier of the product.
         examples:
           GET_PRODUCT:
             value: 10
@@ -30,6 +31,7 @@ paths:
           INVALID_ID:
             value: "344"
     get:
+      summary: Get a product by ID
       description: Fetch product details
       operationId: get-products-id
       tags:
@@ -54,6 +56,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
     patch:
+      summary: Update a product by ID
       description: Update product details
       operationId: patch-products-id
       tags:
@@ -87,6 +90,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
     delete:
+      summary: Delete a product by ID
       description: Delete a product
       tags:
       - Product
@@ -109,6 +113,7 @@ paths:
           $ref: "#/components/responses/NotFound"
   "/products/{id}/image":
     put:
+      summary: Upload or update a product image
       description: Update or upload a product image
       operationId: updateProductImage
       tags:
@@ -117,6 +122,7 @@ paths:
         - name: id
           in: path
           required: true
+          description: Identifier of the product whose image is being uploaded.
           schema:
             type: integer
           examples:
@@ -164,6 +170,7 @@ paths:
           $ref: "#/components/responses/NotFound"
   /products:
     get:
+      summary: List products
       description: GET Products based on type
       operationId: get-products
       tags:
@@ -171,22 +178,26 @@ paths:
       parameters:
         - name: type
           in: query
+          description: Filter products by product type.
           schema:
             $ref: "../common-schemas.yaml#/components/schemas/ProductType"
         - name: pageSize
           in: header
           required: false
+          description: Maximum number of products to return in the response.
           schema:
             type: integer
         - name: from-date
           in: query
           required: false
+          description: Filter products created on or after this date.
           schema:
             type: string
             format: date
         - name: to-date
           in: query
           required: false
+          description: Filter products created on or before this date.
           schema:
             type: string
             format: date
@@ -202,6 +213,7 @@ paths:
         "400":
           $ref: "#/components/responses/BadRequest"
     post:
+      summary: Create a product
       description: POST products
       operationId: post-products
       tags:
@@ -212,6 +224,7 @@ paths:
         - name: Idempotency-Key
           in: header
           required: true
+          description: Idempotency key used to safely retry product creation.
           schema:
             $ref: "#/components/schemas/IdempotencyKey"
           examples:
@@ -242,6 +255,7 @@ paths:
           $ref: "#/components/responses/UnprocessableEntity"
   /orders:
     post:
+      summary: Create an order
       description: POST /orders
       operationId: post-orders
       tags:
@@ -252,6 +266,7 @@ paths:
         - name: Idempotency-Key
           in: header
           required: true
+          description: Idempotency key used to safely retry order creation.
           schema:
             $ref: "#/components/schemas/IdempotencyKey"
           examples:
@@ -284,6 +299,7 @@ paths:
         "422":
           $ref: "#/components/responses/UnprocessableEntity"
     get:
+      summary: List orders
       description: Search for orders
       operationId: get-orders
       tags:
@@ -313,6 +329,7 @@ paths:
         name: id
         in: path
         required: true
+        description: Identifier of the order.
         examples:
           GET_ORDER:
             value: 10
@@ -323,6 +340,7 @@ paths:
           INVALID_ID:
             value: 433
     get:
+      summary: Get an order by ID
       description: Fetch order details
       operationId: get-orders-id
       tags:
@@ -346,6 +364,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
     patch:
+      summary: Update an order by ID
       description: Update order details
       operationId: patch-orders-id
       tags:
@@ -379,6 +398,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
     delete:
+      summary: Cancel an order by ID
       description: Cancel an order
       operationId: delete-orders-id
       tags:

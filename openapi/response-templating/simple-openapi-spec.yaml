@@ -8,18 +8,19 @@ info:
 servers:
   - url: http://localhost:8080
 tags:
-  - name: WIP
-    description: API still under development
-  - name: Product
-    description: Product Related APIs
-  - name: Order
-    description: Order Related APIs
   - name: Monitor
     description: Monitor Related APIs
+  - name: Order
+    description: Order Related APIs
+  - name: Product
+    description: Product Related APIs
+  - name: WIP
+    description: API still under development
 paths:
   /products:
     summary: Create a new product
     post:
+      summary: Create a product
       description: Create a new product
       operationId: createProduct
       tags:
@@ -56,11 +57,13 @@ paths:
         name: type
         in: query
         required: false
+        description: Filter available products by product type.
       - name: pageSize
         in: header
         schema:
           type: integer
         required: true
+        description: Number of products to return per page.
       - name: from-date
         in: query
         schema:
@@ -76,6 +79,7 @@ paths:
         required: true
         description: Filter products created by this date
     get:
+      summary: Find available products
       description: Find available products
       operationId: findAvailableProducts
       tags:
@@ -102,6 +106,7 @@ paths:
                 $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/BadRequest'
   /orders:
     post:
+      summary: Create an order
       description: Create a new order
       operationId: createOrder
       tags:
@@ -134,10 +139,10 @@ paths:
               schema:
                 $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/BadRequest'
     get:
+      summary: Retrieve orders
       description: Retrieve orders
       operationId: getOrders
       tags:
-        - WIP
         - Order
       parameters:
         - in: query

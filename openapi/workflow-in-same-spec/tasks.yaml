@@ -31,6 +31,7 @@ paths:
         - name: x-request-id
           in: header
           required: true
+          description: Correlation identifier for tracking the request across services.
           schema:
             maxLength: 36
             pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
@@ -39,6 +40,7 @@ paths:
             format: uuid
         - name: x-staff-id
           in: header
+          description: Staff identifier associated with the request, when available.
           schema:
             maxLength: 10
             pattern: '^[0-9]{1,10}$'
@@ -46,6 +48,7 @@ paths:
             format: string
         - name: x-user-id
           in: header
+          description: Identifier of the end user associated with the request.
           schema:
             maxLength: 10
             pattern: '^[0-9]{1,10}$'
@@ -53,6 +56,7 @@ paths:
             format: string
         - name: x-user-id-type
           in: header
+          description: Type of end user identifier supplied in the request.
           schema:
             $ref: '#/components/schemas/xUserIdType'
       requestBody:
@@ -88,7 +92,7 @@ paths:
   '/tasks/{task_id}':
     get:
       tags:
-        - get-task
+        - get-tasks
       summary: Endpoint to get a task by id
       description: Retrieves a single task by task id.
       operationId: getTask
@@ -110,6 +114,7 @@ paths:
         - name: x-request-id
           in: header
           required: true
+          description: Correlation identifier for tracking the request across services.
           schema:
             maxLength: 36
             pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
@@ -118,6 +123,7 @@ paths:
             format: uuid
         - name: x-staff-id
           in: header
+          description: Staff identifier associated with the request, when available.
           schema:
             maxLength: 10
             pattern: '^[0-9]{1,10}$'
@@ -125,6 +131,7 @@ paths:
             format: string
         - name: x-user-id
           in: header
+          description: Identifier of the end user associated with the request.
           schema:
             maxLength: 10
             pattern: '^[0-9]{1,10}$'
@@ -132,6 +139,7 @@ paths:
             format: string
         - name: x-user-id-type
           in: header
+          description: Type of end user identifier supplied in the request.
           schema:
             $ref: '#/components/schemas/xUserIdType'
       responses:
@@ -185,6 +193,7 @@ paths:
         - name: x-request-id
           in: header
           required: true
+          description: Correlation identifier for tracking the request across services.
           schema:
             maxLength: 36
             pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
@@ -193,6 +202,7 @@ paths:
             format: uuid
         - name: x-staff-id
           in: header
+          description: Staff identifier associated with the request, when available.
           schema:
             maxLength: 10
             pattern: '^[0-9]{1,10}$'
@@ -200,6 +210,7 @@ paths:
             format: string
         - name: x-user-id
           in: header
+          description: Identifier of the end user associated with the request.
           schema:
             maxLength: 10
             pattern: '^[0-9]{1,10}$'
@@ -207,6 +218,7 @@ paths:
             format: string
         - name: x-user-id-type
           in: header
+          description: Type of end user identifier supplied in the request.
           schema:
             $ref: '#/components/schemas/xUserIdType'
       requestBody:
@@ -269,6 +281,7 @@ paths:
         - name: x-request-id
           in: header
           required: true
+          description: Correlation identifier for tracking the request across services.
           schema:
             maxLength: 36
             pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
@@ -277,6 +290,7 @@ paths:
             format: uuid
         - name: x-staff-id
           in: header
+          description: Staff identifier associated with the request, when available.
           schema:
             maxLength: 10
             pattern: '^[0-9]{1,10}$'
@@ -284,6 +298,7 @@ paths:
             format: string
         - name: x-user-id
           in: header
+          description: Identifier of the end user associated with the request.
           schema:
             maxLength: 10
             pattern: '^[0-9]{1,10}$'
@@ -291,6 +306,7 @@ paths:
             format: string
         - name: x-user-id-type
           in: header
+          description: Type of end user identifier supplied in the request.
           schema:
             $ref: '#/components/schemas/xUserIdType'
       responses:
@@ -358,6 +374,7 @@ components:
           description: Linked Application Entity Id of the task
           nullable: true
         hold:
+          type: object
           allOf:
             - $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/FraudHold'
           description: Fraud hold details - Fraud type tasks only
@@ -403,6 +420,7 @@ components:
           type: string
           description: State of the task
         hold:
+          type: object
           allOf:
             - $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/FraudHold'
           description: Fraud hold details
@@ -497,6 +515,7 @@ components:
           description: Linked entity Id within the application
           nullable: true
         hold:
+          type: object
           allOf:
             - $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/FraudHold'
           description: Fraud hold details
@@ -516,6 +535,7 @@ components:
           description: Date when task was updated
           nullable: true
         additionalDocumentsDetails:
+          type: object
           allOf:
             - $ref: '#/components/schemas/additionalDocumentsDetails'
           description: Additional Documents Details
@@ -537,6 +557,7 @@ components:
           type: string
           description: Outcome of the task
         additionalDocumentsDetails:
+          type: object
           allOf:
             - $ref: '#/components/schemas/additionalDocumentsDetails'
           description: Additional Document Details
@@ -551,43 +572,6 @@ components:
         - cif
       type: string
   parameters:
-    applicationNumberQuery:
-      name: applicationNumber
-      in: query
-      description: Application number
-      schema:
-        type: string
-    xRequestIdHeader:
-      name: x-request-id
-      in: header
-      required: true
-      schema:
-        maxLength: 36
-        pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
-        type: string
-        description: Must be in UUID v4 format.
-        format: uuid
-    xStaffIdHeader:
-      name: x-staff-id
-      in: header
-      schema:
-        maxLength: 10
-        pattern: '^[0-9]{1,10}$'
-        type: string
-        format: string
-    xUserIdHeader:
-      name: x-user-id
-      in: header
-      schema:
-        maxLength: 10
-        pattern: '^[0-9]{1,10}$'
-        type: string
-        format: string
-    xUserIdTypeHeader:
-      name: x-user-id-type
-      in: header
-      schema:
-        $ref: '#/components/schemas/xUserIdType'
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -603,15 +587,15 @@ components:
 security:
   - OAuth2: [ ]
 tags:
+  - name: cancel-tasks
+    description: Cancels tasks for a given application.
+  - name: complete-verification
+    description: Complete verification for a given application.
   - name: create-tasks
     description: Creates a list of tasks for a given application
+  - name: delete-task
+    description: Deletes an existing task for a given an application id.
   - name: get-tasks
     description: Retrieves a list of tasks of a given application
   - name: update-task
     description: Updates a task for a given application
-  - name: complete-verification
-    description: Complete verification for a given application.
-  - name: cancel-tasks
-    description: Cancels tasks for a given application.
-  - name: delete-task
-    description: Deletes an existing task for a given an application id.

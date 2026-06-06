@@ -2,11 +2,18 @@ openapi: 3.0.3
 info:
   title: Tax Service API
   version: 1.0.0
+tags:
+  - name: Tax
+    description: Tax invoice operations.
 
 paths:
   /tax/invoices:
     post:
+      summary: Raise a tax invoice
+      description: Raises a tax invoice for the supplied order details.
       operationId: raiseTaxInvoice
+      tags:
+        - Tax
       requestBody:
         required: true
         content:

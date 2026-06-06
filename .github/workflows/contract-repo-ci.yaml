@@ -19,8 +19,32 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get changed OpenAPI files
+        id: changed-openapi-files
+        uses: tj-actions/changed-files@v47
+        with:
+          files: |
+            common/openapi/**/*.yaml
+            common/openapi/**/*.yml
+            common/openapi/**/*.json
+            openapi/**/*.yaml
+            openapi/**/*.yml
+            openapi/**/*.json
+
       - name: Fetch default branch
         run: git fetch origin "${DEFAULT_BRANCH}" --depth=1
+
+      - name: Write specmatic license key to file
+        if: steps.changed-openapi-files.outputs.any_changed == 'true' || env.PUBLISH_TO_INSIGHTS == 'true'
+        run: |
+          mkdir -p ~/.specmatic
+          echo "${{ secrets.SPECMATIC_LICENSE_KEY }}" > ~/.specmatic/specmatic-license.txt
+
+      - name: Run Specmatic linter on OpenAPI specs
+        if: steps.changed-openapi-files.outputs.any_changed == 'true'
+        shell: bash
+        run: |
+          ./scripts/run-specmatic-openapi-linter.sh ${{ steps.changed-openapi-files.outputs.all_changed_files }}
 
       - name: Validate inline OpenAPI examples
         shell: bash
@@ -39,12 +63,6 @@ jobs:
             specmatic/enterprise \
             backward-compatibility-check \
             --base-branch "origin/${DEFAULT_BRANCH}" 
-
-      - name: Write specmatic license key to file
-        if: env.PUBLISH_TO_INSIGHTS == 'true'
-        run: |
-          mkdir -p ~/.specmatic
-          echo "${{ secrets.SPECMATIC_LICENSE_KEY }}" > ~/.specmatic/specmatic-license.txt
 
       - name: Generate central contract repo report
         if: env.PUBLISH_TO_INSIGHTS == 'true'

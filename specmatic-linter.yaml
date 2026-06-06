@@ -1,0 +1,21 @@
+profiles:
+  default:
+    rules:
+      extends:
+        - recommended
+      exclude:
+        - info-contact
+        - info-license
+        - no-invalid-media-type-examples
+        - no-invalid-parameter-examples
+        - no-empty-servers
+        - no-server-example.com
+        - operation-4xx-problem-details-rfc7807
+        - operation-4xx-response
+        - path-http-verbs-order
+        - path-segment-plural
+        - paths-kebab-case
+        - required-string-property-missing-min-length
+        - scalar-property-missing-example
+        - security-defined
+        - spec-strict-refs

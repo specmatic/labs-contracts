@@ -2,23 +2,28 @@ openapi: 3.0.1
 info:
   title: User API
   version: "1.0.0"
+tags:
+  - name: User
+    description: User retrieval operations.
 paths:
   /api/users/{id}:
     get:
       summary: Get user by id
+      description: Retrieves a user by identifier.
+      operationId: getUserById
+      tags:
+        - User
       parameters:
-        - $ref: "#/components/parameters/UserIdPathParam"
+        - name: id
+          in: path
+          required: true
+          description: Identifier of the user.
+          schema:
+            type: integer
       responses:
         "200":
           $ref: "#/components/responses/User200"
 components:
-  parameters:
-    UserIdPathParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
   responses:
     User200:
       description: User found

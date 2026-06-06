@@ -5,11 +5,17 @@ info:
   description: Sample verification service used to teach Specmatic matchers in tests.
 servers:
   - url: http://verification-service:8080
+tags:
+  - name: Verification
+    description: Verification workflow operations.
 paths:
   /verifyUser:
     post:
       summary: Verify a user before continuing a workflow
+      description: Verifies a user request and returns the verification decision.
       operationId: verifyUser
+      tags:
+        - Verification
       requestBody:
         required: true
         content:

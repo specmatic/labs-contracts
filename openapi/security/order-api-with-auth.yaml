@@ -2,6 +2,11 @@ openapi: 3.0.1
 info:
   title: Order API
   version: "2.0"
+tags:
+  - name: Order
+    description: Order operations.
+  - name: Product
+    description: Product operations.
 servers:
   - url: "http://localhost:3000"
 paths:
@@ -12,6 +17,7 @@ paths:
         name: id
         in: path
         required: true
+        description: Identifier of the product.
         examples:
           GET_DETAILS:
             value: 10
@@ -23,7 +29,9 @@ paths:
             value: 20
     get:
       summary: Fetch product details
-      tags: []
+      description: Retrieves a product by its identifier.
+      tags:
+        - Product
       responses:
         "200":
           description: OK
@@ -58,7 +66,10 @@ paths:
         - basicAuth: []
     post:
       summary: Update product details
+      description: Updates an existing product by its identifier.
       operationId: post-products-id
+      tags:
+        - Product
       responses:
         "200":
           description: Update successful
@@ -88,7 +99,10 @@ paths:
         - oAuth2AuthCode: []
     delete:
       summary: Delete a product
+      description: Deletes an existing product by its identifier.
       operationId: delete-products-id
+      tags:
+        - Product
       responses:
         "200":
           description: Deletion successful
@@ -106,9 +120,14 @@ paths:
   /products:
     get:
       summary: GET Products based on type
+      description: Returns products filtered by the requested criteria.
+      operationId: get-products
+      tags:
+        - Product
       parameters:
         - name: type
           in: query
+          description: Filter products by product type.
           schema:
             type: string
             enum:
@@ -131,6 +150,10 @@ paths:
         - basicAuth: []
     post:
       summary: POST /products
+      description: Creates a new product.
+      operationId: post-products
+      tags:
+        - Product
       requestBody:
         required: true
         content:
@@ -152,6 +175,8 @@ paths:
     get:
       summary: Search for orders
       operationId: get-orders
+      tags:
+        - Order
       responses:
         "200":
           description: OK
@@ -175,6 +200,7 @@ paths:
             type: integer
           in: query
           name: productid
+          description: Filter orders by product identifier.
           examples:
             200_OK:
               value: 10
@@ -182,14 +208,19 @@ paths:
             type: string
           in: query
           name: status
+          description: Filter orders by fulfillment status.
           examples:
             200_OK:
               value: fulfilled
-      description: ""
+      description: Returns orders matching the supplied query filters.
       security:
         - basicAuth: []
     post:
       summary: POST /orders
+      description: Creates a new order.
+      operationId: post-orders
+      tags:
+        - Order
       requestBody:
         required: true
         content:
@@ -224,6 +255,7 @@ paths:
         name: id
         in: path
         required: true
+        description: Identifier of the order.
         examples:
           DETAILS:
             value: 10
@@ -231,7 +263,9 @@ paths:
             value: 433
     get:
       summary: Fetch order details
-      tags: []
+      tags:
+        - Order
+      description: Retrieves an order by its identifier.
       responses:
         "200":
           description: OK
@@ -267,7 +301,10 @@ paths:
         - basicAuth: []
     post:
       summary: Update order details
+      description: Updates an existing order by its identifier.
       operationId: post-orders-id
+      tags:
+        - Order
       responses:
         "200":
           description: Success
@@ -297,7 +334,10 @@ paths:
         - oAuth2AuthCode: []
     delete:
       summary: Cancel an order
+      description: Cancels an existing order by its identifier.
       operationId: delete-orders-id
+      tags:
+        - Order
       responses:
         "200":
           description: Cancel successful
