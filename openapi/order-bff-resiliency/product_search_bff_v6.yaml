@@ -8,15 +8,14 @@ info:
 servers:
   - url: http://localhost:8080
 tags:
-  - name: Monitor
-    description: Monitor APIs
   - name: Product
     description: Product related APIs
+  - name: Monitor
+    description: Monitor APIs
 paths:
   /products:
     summary: Create a new product
     post:
-      summary: Create a product
       description: Create a new product
       operationId: createProduct
       tags:
@@ -67,7 +66,6 @@ paths:
         name: type
         in: query
         required: false
-        description: Filter available products by product type.
         examples:
           SUCCESS_GET:
             value: gadget
@@ -76,7 +74,6 @@ paths:
         schema:
           type: integer
         required: true
-        description: Number of products to return per page.
         examples:
           SUCCESS_GET:
             value: 10
@@ -101,7 +98,6 @@ paths:
           SUCCESS_GET:
             value: "2025-11-28"
     get:
-      summary: Find available products
       description: Find available products
       operationId: findAvailableProducts
       tags:
