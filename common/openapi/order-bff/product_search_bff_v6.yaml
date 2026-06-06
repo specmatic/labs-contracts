@@ -182,7 +182,7 @@ paths:
       description: Retrieve orders
       operationId: getOrders
       tags:
-        - Order
+        - WIP
       parameters:
         - in: query
           name: orderId
