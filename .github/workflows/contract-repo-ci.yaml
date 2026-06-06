@@ -51,6 +51,7 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/usr/src/app" \
+            -w /usr/src/app \
             specmatic/enterprise \
             validate
 
@@ -59,6 +60,7 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/usr/src/app" \
+            -w /usr/src/app \
             --user $(id -u):$(id -g) \
             specmatic/enterprise \
             backward-compatibility-check \
@@ -70,6 +72,9 @@ jobs:
           docker run --rm \
             -v ~/.specmatic:/root/.specmatic \
             -v ${{ github.workspace }}:/usr/src/app \
+            -e GIT_DIR=/usr/src/app/.git \
+            -e GIT_WORK_TREE=/usr/src/app \
+            -w /usr/src/app \
             specmatic/enterprise \
             central-contract-repo-report
 
@@ -79,6 +84,9 @@ jobs:
           docker run --rm \
             -v ~/.specmatic:/root/.specmatic \
             -v ${{ github.workspace }}:/usr/src/app \
+            -e GIT_DIR=/usr/src/app/.git \
+            -e GIT_WORK_TREE=/usr/src/app \
+            -w /usr/src/app \
             specmatic/enterprise \
             send-report \
             --metadata build_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} \
