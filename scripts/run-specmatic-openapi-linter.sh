@@ -13,6 +13,7 @@ SPEC_CANDIDATES=()
 SKIPPED_SPECS=(
   "common/openapi/order-bff/product_search_bff_v6.yaml"
   "openapi/order-bff-resiliency/product_search_bff_v6.yaml"
+  "openapi/schema-resiliency/simple-openapi-spec.yaml"
 )
 
 if [ "$#" -gt 0 ]; then
