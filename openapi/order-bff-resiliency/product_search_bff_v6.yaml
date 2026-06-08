@@ -16,6 +16,7 @@ paths:
   /products:
     summary: Create a new product
     post:
+      summary: Create a new product
       description: Create a new product
       operationId: createProduct
       tags:
@@ -98,6 +99,7 @@ paths:
           SUCCESS_GET:
             value: "2025-11-28"
     get:
+      summary: Find available products
       description: Find available products
       operationId: findAvailableProducts
       tags:

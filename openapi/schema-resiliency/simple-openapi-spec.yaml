@@ -20,6 +20,7 @@ paths:
   /products:
     summary: Create a new product
     post:
+      summary: Create a new product
       description: Create a new product
       operationId: createProduct
       tags:
@@ -76,6 +77,7 @@ paths:
         required: true
         description: Filter products created by this date
     get:
+      summary: Find available products
       description: Find available products
       operationId: findAvailableProducts
       tags:
@@ -104,6 +106,7 @@ paths:
                 $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/BadRequest'
   /orders:
     post:
+      summary: Create a new order
       description: Create a new order
       operationId: createOrder
       tags:
@@ -134,6 +137,7 @@ paths:
               schema:
                 $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/BadRequest'
     get:
+      summary: Retrieve orders
       description: Retrieve orders
       operationId: getOrders
       tags:
@@ -160,4 +164,3 @@ components:
   schemas:
     Product:
       $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/ExtendedProduct'
-
