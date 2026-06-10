@@ -12,9 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      # No `github-report: true` here: that template renders failed/other tests as a
+      # collapsed plain-text <details> list (no table). The default reports instead
+      # emit proper tables — Summary, Failed Tests (with messages), and a full Tests
+      # table that includes the wip "other" tests. Matches specmatic-order-bff-java.
       - name: Parse BCC CTRF report
         uses: ctrf-io/github-test-reporter@v1
         with:
           report-path: build/reports/specmatic/backward_compatibility/ctrf/ctrf-report.json
-          github-report: true
         if: always()
