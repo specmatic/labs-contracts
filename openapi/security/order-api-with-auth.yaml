@@ -13,7 +13,7 @@ paths:
   "/products/{id}":
     parameters:
       - schema:
-          type: number
+          type: integer
         name: id
         in: path
         required: true
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponseBody"
+                $ref: "./common_response_schema.yaml#/components/schemas/BadRequestErrorResponseBody"
               examples:
                 INVALID_ID:
                   value:
@@ -287,7 +287,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponseBody"
+                $ref: "./common_response_schema.yaml#/components/schemas/BadRequestErrorResponseBody"
               examples:
                 INVALID_ID:
                   value:
@@ -350,18 +350,6 @@ paths:
         - apiKeyAuth: []
 components:
   schemas:
-    ErrorResponseBody:
-      properties:
-        id:
-          type: number
-        timestamp:
-          type: string
-        status:
-          type: number
-        error:
-          type: string
-        message:
-          type: string
   securitySchemes:
     basicAuth:
       type: http
