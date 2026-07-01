@@ -11,7 +11,12 @@ components:
       content:
         application/json:
           schema:
-            $ref: "./common_response_schema.yaml#/components/schemas/BadRequestErrorResponseBody"
+            allOf:
+              - $ref: "./common_response_schema.yaml#/components/schemas/BadRequestErrorResponseBody"
+              - type: object
+                properties:
+                  path:
+                    type: string
     Forbidden:
       description: "Forbidden"
       content:
