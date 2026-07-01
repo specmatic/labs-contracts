@@ -44,6 +44,8 @@ paths:
                     type: "gadget"
                     inventory: 10
                     id: 10
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
         "404":
@@ -75,6 +77,8 @@ paths:
             text/plain:
               schema:
                 type: string
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
         "403":
@@ -103,6 +107,8 @@ paths:
               examples:
                 DELETE_PRODUCT:
                   value: "success"
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
       security:
@@ -134,6 +140,8 @@ paths:
                 type: array
                 items:
                   $ref: "./common.yaml#/components/schemas/Product"
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
       security:
@@ -157,6 +165,8 @@ paths:
             application/json:
               schema:
                 $ref: "./common.yaml#/components/schemas/ProductId"
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
         "403":
@@ -185,6 +195,8 @@ paths:
                       count: 2
                       status: "pending"
                       id: 10
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
       parameters:
@@ -226,6 +238,8 @@ paths:
             application/json:
               schema:
                 $ref: "./common.yaml#/components/schemas/OrderId"
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
         "403":
@@ -264,6 +278,8 @@ paths:
                     count: 2
                     status: "pending"
                     id: 10
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
         "404":
@@ -296,6 +312,8 @@ paths:
             text/plain:
               schema:
                 type: string
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
         "403":
@@ -324,6 +342,8 @@ paths:
               examples:
                 DELETE_ORDER:
                   value: "success"
+        "401":
+          $ref: "./common_responses.yaml#/components/responses/Unauthorized"
         "400":
           $ref: "./common_responses.yaml#/components/responses/BadRequest"
       security:
