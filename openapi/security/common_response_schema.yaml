@@ -6,7 +6,7 @@ components:
       properties:
         timestamp:
           type: string
-          format: datetime
+          format: date-time
         status:
           type: number
         error:
