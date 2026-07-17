@@ -51,5 +51,6 @@ docker run --rm \
   -v "$ROOT_DIR:/usr/src/app" \
   -v "$LICENSE_DIR:/root/.specmatic:ro" \
   -w /usr/src/app \
+  --user "$(id -u):$(id -g)" \
   specmatic/enterprise \
   lint "${OPENAPI_SPECS[@]}" --config "$LINTER_CONFIG"
