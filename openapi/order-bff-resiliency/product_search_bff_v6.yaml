@@ -60,6 +60,12 @@ paths:
             application/json:
               schema:
                 $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/BadRequest'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '../../common/openapi/common-schemas.yaml#/components/schemas/UnsupportedMediaType'
   /findAvailableProducts:
     parameters:
       - schema:

@@ -178,6 +178,10 @@ components:
           type: string
         message:
           type: string
+    UnsupportedMediaType:
+      title: Unsupported Media Type
+      type: object
+      additionalProperties: true
   responses:
     MonitorStatus:
       description: Monitor status
