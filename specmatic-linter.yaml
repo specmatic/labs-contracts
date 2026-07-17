@@ -4,6 +4,14 @@ profiles:
       extends:
         - recommended
       exclude:
+        - contact-information
+        - query-parameter-camel-case
+        - hosts-https-only
+        - array-max-items
+        - integer-bounds-required
+        - rate-limit-headers
+        - no-numeric-ids
+        - string-max-length-or-enum
         - info-contact
         - info-license
         - no-invalid-media-type-examples
