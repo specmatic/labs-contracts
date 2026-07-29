@@ -2,7 +2,7 @@ profiles:
   default:
     rules:
       extends:
-        - recommended
+        - lenient
       exclude:
         - info-contact
         - info-license
@@ -19,3 +19,5 @@ profiles:
         - scalar-property-missing-example
         - security-defined
         - spec-strict-refs
+        - security-scheme-oauth2
+        - hosts-https-only

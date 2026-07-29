@@ -1,6 +1,7 @@
 openapi: 3.0.1
 info:
   title: Order API
+  description: Order API with authentication
   version: "2.0"
 tags:
   - name: Order
