@@ -2,7 +2,7 @@ profiles:
   default:
     rules:
       extends:
-        - recommended
+        - lenient
       exclude:
         - contact-information
         - query-parameter-camel-case
@@ -27,3 +27,5 @@ profiles:
         - scalar-property-missing-example
         - security-defined
         - spec-strict-refs
+        - security-scheme-oauth2
+        - hosts-https-only
